@@ -1,5 +1,5 @@
 
- @import url("https://use.typekit.net/blc7cfn.css");
+ @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Marck+Script&display=swap');
 
 :root{
     --fonte: lato, sans-serif; 
@@ -177,22 +177,21 @@ main{
     padding-right: 5px;
 }
 
-.form-transaction, .extrato{font-size: 0.8em;}
-
-/* título do formulário e de extrato */
-.form-tit, .extrato-tit{
-    font-size: 1.8em;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Formulário */
+/* Formulário de transação */
 .form-transaction{
     display: flex;
     flex-direction: column;
     width: 40%;
     border: 1px solid  var(--cor4);
     padding: 5px;
+    font-size: 0.8em;
+}
+
+/* título do formulário */
+.form-tit{
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
 }
 
 /* cada item do formulário */
@@ -217,26 +216,49 @@ main{
     height: 25px;
     border-radius: 4px;
 }
+
 .form-submit:hover{opacity: 0.85;}
 
-/* Elemento responsável por mostrar os extratos */
+/* Extratos -----------------------------------------------------------------*/ 
+
+/* elemento responsável por motrar os extratos*/
 .extrato{
     padding: 5px;
     width: 60%;
+    font-size: 0.8em;
 }
 
-.categoria, .transaction{
+/* título do extrato */
+.extrato-tit{
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+}
+    
+/* categorias ou colunas */
+.top-header, .bottom-header{
     display: flex;
     justify-content: space-between;
     padding: 5px;
+    font-weight: bold; 
 }
 
-/* categorias ou colunas */
-.categoria{font-weight: bold;}
-.categoria-header, .transaction{border-bottom: 1px solid var(--cor4);}
+.top-header{border-bottom: 1px solid var(--cor4)}
+
+.bottom-header{
+    border-top: 1px solid var(--cor4); 
+    margin-top: 2px;
+}
 
 /* cada transação do extrato */
-.transaction{align-items: center;}
+.transaction{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+    border-bottom: 1px solid var(--cor4);
+    font-weight: 00;
+}
 
 /* partes da transação */
 .transaction-type{
@@ -247,12 +269,11 @@ main{
     margin-right: 10px;
     width: 20px
 }
-.product-name{width: 70%; text-align: left;}
-.product-value{width: 30%; text-align: right;}
-
 .buy::before{content: '-'}
 .sale::before{content: '+'}
 
+.product-name{width: 70%; text-align: left;}
+.product-value{width: 30%; text-align: right;}
 
 /*Rodapé ---------------------------------------------------------------------*/
 footer{
@@ -260,6 +281,3 @@ footer{
     background-color: var(--cor5);
     height: 8px;
 }
-
-
-
