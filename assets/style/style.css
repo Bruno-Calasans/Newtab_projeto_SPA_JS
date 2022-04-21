@@ -1,0 +1,264 @@
+
+ @import url("https://use.typekit.net/blc7cfn.css");
+
+:root{
+    --fonte: lato, sans-serif; 
+    --cor1: #FFFFFF;
+    --cor2: #E5E5E5;
+    --cor3: #E0E0E0;
+    --cor4: #979797;
+    --cor5: #333333;
+    --cor6: rgb(20, 62, 140);
+
+}
+
+/* Estilos genérico ----------------------------------------------------------*/
+*{
+    margin: 0px;
+    color: var(--cor5);
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 80px 1fr 8px;
+    grid-template-areas: 
+    'cabeçalho cabeçalho'
+    'conteúdo conteúdo'
+    'rodapé rodapé';
+    height: 100vh;
+    font-family: var(--fonte);
+}
+
+a{text-decoration: none;}
+
+/* Cabeçalho -----------------------------------------------------------------*/
+header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    padding: 15px;
+    background-color: var(--cor3);
+    grid-area: cabeçalho;
+   
+}
+
+.header-content{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 1100px;
+}
+
+/* Logo da página */
+.logo{
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* nome da página */
+.nomePag{
+    font-size: 20px;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+/* Menus ---------------------------------------------------------------------*/
+
+/* menu mobile */
+#menu-toggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    font-size: 2em; 
+    color: var(--cor5);
+    background-color: var(--cor3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: none; /*oculto por padrão*/
+}
+
+/* menu desktop-tablet */
+#menu{
+    background-color:  var(--cor1);
+    border-radius: 4px;
+}
+
+/* lista com as opções do menu desktop/tablet */
+.menu-list{
+    display: flex;
+    padding: 0px;
+    list-style: none;
+}
+
+/* opção do menu desktop */
+.list-item{
+    font-size: 16px;
+    margin: 4px;
+    padding: 4px;
+}
+
+.list-item a:hover{color: var(--cor6)}
+
+.separador{
+    content: '|';
+    align-self: center;
+}
+
+/* lista com as opções do menu mobile */
+.menu-list-toggle{
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    height: 100vh;
+    width: 200px;
+    padding-top: 50px;
+    background-color: var(--cor5);
+    color: var(--cor1);
+    overflow: hidden;
+    animation: showToggleTablet 0.5s;
+}
+
+/* animações */
+@keyframes showToggleTablet{from {width: 0px} to {width: 200px}}
+@keyframes showToggleMobile{from {width: 0px} to {width: 300px}}
+
+/* opção do menu mobile */
+.list-item-toggle{
+    width: 200px;
+    text-align: right;
+    font-size: 16px;
+    color: var(--cor1);
+    overflow: hidden;
+}
+
+/* links de cada opção do menu mobile */
+.list-item-toggle a{
+    display: block; 
+    color: var(--cor1);
+    padding: 5px;
+}
+
+.list-item-toggle a:hover{
+    color: var(--cor5); 
+    background-color: var(--cor4);
+    font-weight: bold;
+}
+
+/* botão de fechar do menu mobile */
+#closeBtn{
+    position: absolute;
+    color: var(--cor4);
+    font-size: 1.8em;
+    left: 10px;
+    top: 0px;
+    cursor: pointer;
+    display: none;
+    z-index: 1;
+}
+
+#closeBtn:hover{color: var(--cor1);}
+
+/*Conteúdo principal ---------------------------------------------------------*/
+main{
+    display: flex;
+    grid-area: conteúdo;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* título do formulário e de extrato */
+.form-tit, .extrato-tit{
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.transação, .extrato{font-size: 0.8em;}
+
+/* Formulário */
+.transação{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 1px solid  var(--cor4);
+    padding: 5px;
+}
+
+/* cada item do formulário */
+.form-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+}
+
+.transação input, .transação select{
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.form-submit{
+    border: 0px;
+    background-color: var(--cor5);
+    color: var(--cor1);
+    cursor: pointer;
+    height: 25px;
+    border-radius: 4px;
+}
+
+.form-submit:hover{opacity: 0.85;}
+
+/* Extratos */
+.extrato{
+    padding: 5px;
+    width: 60%;
+}
+
+.categoria, .mercadoria{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+/* categorias */
+.categoria{font-weight: bold;}
+.categoria-header, .mercadoria{border-bottom: 1px solid var(--cor4);}
+
+/* elementros da div .mercadoria*/
+.nome{width: 80%}
+.valor{width: 20%}
+
+/* classe para quando a collapse-box estiver fechada */
+.inativo::before{
+    font-weight: bold;
+    margin-right: 5px;
+    content: '+';
+}
+
+/* classes para quando a collapse-box estiver aberta */
+.ativo::before{ 
+    font-weight: bold;
+    margin-right: 5px;
+    content: '-';
+}
+
+/*Rodapé ---------------------------------------------------------------------*/
+footer{
+    grid-area: rodapé;
+    background-color: var(--cor5);
+    height: 8px;
+}
+
+
+

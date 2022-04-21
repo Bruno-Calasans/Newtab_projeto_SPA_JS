@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Individual</title>
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/responsividade.css">
+    <script src="assets/scripts/menu-mobile.js" defer></script>
+</head>
+<body>
+
+    <header>
+
+        <!-- contéudo do header -->
+        <div class="header-content">
+
+            <img class="logo" src="assets/img/logo.svg" alt="">
+            <div class="nomePag">Controle Financeiro</div>
+
+            <div class="menus">
+                 <!-- menu desktop/tablet -->
+                <nav id="menu">
+
+                    <ul class="menu-list">
+                        <div id="closeBtn">×</div>
+
+                        <li class="list-item">
+                            <a href="">Cadastro de Transações</a>
+                        </li>
+
+                        <li class="separador">|</li>
+
+                        <li class="list-item">
+                            <a href="">Limpar Dados</a>
+                        </li>
+                    </ul>
+
+                </nav>
+                
+                <!-- menu mobile -->
+                <nav id="menu-toggle">☰</nav>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- elementro para cadastrar as transações -->
+        <form action="" class="transação">
+
+            <div class="form-item form-tit">Nova Transação</div>
+
+            <div class="form-item">
+                <label for="tipo">Tipo de Transação</label>
+                <select name="" id="tipo">
+                    <option value="1">Compra</option>
+                    <option value="2">Venda</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="nome">Nome da mercadoria</label>
+                <input type="text" name="" id="nome" placeholder="Mercadoria">
+            </div>
+
+            <div class="form-item">
+                <label for="valor">Valor</label>
+                <input type="number" name="" id="valor" placeholder="R$ 00,00">
+            </div>
+
+            <input class="form-submit" type="submit" value="Adicionar transação">
+            
+        </form>
+
+        <!-- elemento que mostra os extratos -->
+        <div class="extrato">
+
+            <div class="extrato-tit">Extrato das Transações</div>
+
+            <div class="categoria categoria-header">
+                <div>Mercadoria</div>
+                <div>Valor</div>
+            </div>
+
+            <div class="mercadoria">
+                <div class="nome ativo">Caminhão modelo ultra super foda pica supremo poderoso imponente derradeiro imparável singular XM980</div>
+                <div class="preço">R$ 1000.00</div>
+            </div>
+
+            <div class="mercadoria">
+                <div class="nome ativo">Celular X78</div>
+                <div class="preço">R$ 1200.00</div>
+            </div>
+
+            <div class="mercadoria">
+                <div class="nome inativo">Bicicleta</div>
+                <div class="preço">R$ 200.00</div>
+            </div>
+
+            <div class="categoria categoria-footer">
+                <div>Total</div>
+                <div>R$ 2400.00</div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+    </footer>
+    
+</body>
+</html>
