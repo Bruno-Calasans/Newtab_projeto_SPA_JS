@@ -8,7 +8,7 @@
         justify-content: center;
     }
 
-    .transação{width: 400px;}
+    .form-transaction{width: 400px;}
 
     .extrato{
         margin-left: 20px;
@@ -28,7 +28,7 @@
 
     /* ajustando o header */
     .header-content{justify-content: space-between;}
-    .nomePag{flex-grow: 0;}
+    .pagName{flex-grow: 0;}
 
     /* ocultando o menu desktop/tablet */
     #menu{display: none;}
@@ -42,7 +42,7 @@
     }
 
     /* formulário */
-    .transação{
+    .form-transaction{
         width: 100%;
         display: grid;
         grid-template-columns: 30% 40% 30%;
@@ -76,7 +76,7 @@
     }
 
     /* formulário */
-    .transação{
+    .form-transaction{
         display: flex;
         border: 0px;
         border-bottom: 2px solid  var(--cor4);

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/responsividade.css">
     <script src="assets/scripts/menu-mobile.js" defer></script>
+    <script src="assets/scripts/form.js" defer></script>
 </head>
 <body>
 
@@ -17,12 +18,13 @@
         <div class="header-content">
 
             <img class="logo" src="assets/img/logo.svg" alt="">
-            <div class="nomePag">Controle Financeiro</div>
+
+            <div class="pagName">Controle Financeiro</div>
 
             <div class="menus">
+
                  <!-- menu desktop/tablet -->
                 <nav id="menu">
-
                     <ul class="menu-list">
                         <div id="closeBtn">×</div>
 
@@ -36,11 +38,11 @@
                             <a href="">Limpar Dados</a>
                         </li>
                     </ul>
-
                 </nav>
-                
+
                 <!-- menu mobile -->
                 <nav id="menu-toggle">☰</nav>
+
             </div>
         </div>
 
@@ -48,27 +50,35 @@
 
     <main>
 
-        <!-- elementro para cadastrar as transações -->
-        <form action="" class="transação">
+        <!-- formulário  para cadastrar as transações -->
+        <form class="form-transaction" action="">
 
-            <div class="form-item form-tit">Nova Transação</div>
+            <div class="form-tit form-item">Nova Transação</div>
 
             <div class="form-item">
-                <label for="tipo">Tipo de Transação</label>
-                <select name="" id="tipo">
+
+                <label for="form-transaction-type">Tipo de Transação</label>
+                <select id="form-transaction-type">
                     <option value="1">Compra</option>
                     <option value="2">Venda</option>
                 </select>
+
             </div>
 
             <div class="form-item">
-                <label for="nome">Nome da mercadoria</label>
-                <input type="text" name="" id="nome" placeholder="Mercadoria">
+                
+                <label for="form-transaction-product">Nome da mercadoria</label>
+                <input type="text" id="form-transaction-product" 
+                placeholder="Mercadoria">
+
             </div>
 
             <div class="form-item">
-                <label for="valor">Valor</label>
-                <input type="number" name="" id="valor" placeholder="R$ 00,00">
+
+                <label for="form-transaction-value">Valor</label>
+                <input type="number" id="form-transaction-value" 
+                placeholder="R$ 00,00">
+
             </div>
 
             <input class="form-submit" type="submit" value="Adicionar transação">
@@ -85,19 +95,23 @@
                 <div>Valor</div>
             </div>
 
-            <div class="mercadoria">
-                <div class="nome ativo">Caminhão modelo ultra super foda pica supremo poderoso imponente derradeiro imparável singular XM980</div>
-                <div class="preço">R$ 1000.00</div>
-            </div>
-
-            <div class="mercadoria">
-                <div class="nome ativo">Celular X78</div>
-                <div class="preço">R$ 1200.00</div>
-            </div>
-
-            <div class="mercadoria">
-                <div class="nome inativo">Bicicleta</div>
-                <div class="preço">R$ 200.00</div>
+            <div id="transactions">
+                
+                <div class="transaction">
+                    <div class="transaction-type buy"></div>
+                    <div class="product-name">Caminhão modelo ultra super foda pica supremo poderoso imponente derradeiro imparável singular XM980</div>
+                    <div class="product-value">R$ 1000.00</div>
+                </div>
+                <div class="transaction">
+                    <div class="transaction-type sale"></div>
+                    <div class="product-name ">Celular X78</div>
+                    <div class="product-value">R$ 1200.00</div>
+                </div>
+                <div class="transaction">
+                    <div class="transaction-type buy"></div>
+                    <div class="product-name">Bicicleta</div>
+                    <div class="product-value">R$ 200.00</div>
+                </div>
             </div>
 
             <div class="categoria categoria-footer">

@@ -59,7 +59,7 @@ header{
 }
 
 /* nome da página */
-.nomePag{
+.pagName{
     font-size: 20px;
     font-weight: bold;
     flex-grow: 1;
@@ -177,6 +177,8 @@ main{
     padding-right: 5px;
 }
 
+.form-transaction, .extrato{font-size: 0.8em;}
+
 /* título do formulário e de extrato */
 .form-tit, .extrato-tit{
     font-size: 1.8em;
@@ -184,10 +186,8 @@ main{
     text-align: center;
 }
 
-.transação, .extrato{font-size: 0.8em;}
-
 /* Formulário */
-.transação{
+.form-transaction{
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -203,11 +203,12 @@ main{
     margin: 5px;
 }
 
-.transação input, .transação select{
+.form-transaction input, .form-transaction select{
     margin-bottom: 5px;
     padding: 5px;
 }
 
+/* botão de enviar do formulário */
 .form-submit{
     border: 0px;
     background-color: var(--cor5);
@@ -216,42 +217,42 @@ main{
     height: 25px;
     border-radius: 4px;
 }
-
 .form-submit:hover{opacity: 0.85;}
 
-/* Extratos */
+/* Elemento responsável por mostrar os extratos */
 .extrato{
     padding: 5px;
     width: 60%;
 }
 
-.categoria, .mercadoria{
+.categoria, .transaction{
     display: flex;
     justify-content: space-between;
     padding: 5px;
 }
 
-/* categorias */
+/* categorias ou colunas */
 .categoria{font-weight: bold;}
-.categoria-header, .mercadoria{border-bottom: 1px solid var(--cor4);}
+.categoria-header, .transaction{border-bottom: 1px solid var(--cor4);}
 
-/* elementros da div .mercadoria*/
-.nome{width: 80%}
-.valor{width: 20%}
+/* cada transação do extrato */
+.transaction{align-items: center;}
 
-/* classe para quando a collapse-box estiver fechada */
-.inativo::before{
-    font-weight: bold;
-    margin-right: 5px;
-    content: '+';
+/* partes da transação */
+.transaction-type{
+    display: flex;
+    justify-content: center;
+    font-weight: bold; 
+    font-size: 1.5em;
+    margin-right: 10px;
+    width: 20px
 }
+.product-name{width: 70%; text-align: left;}
+.product-value{width: 30%; text-align: right;}
 
-/* classes para quando a collapse-box estiver aberta */
-.ativo::before{ 
-    font-weight: bold;
-    margin-right: 5px;
-    content: '-';
-}
+.buy::before{content: '-'}
+.sale::before{content: '+'}
+
 
 /*Rodapé ---------------------------------------------------------------------*/
 footer{
