@@ -51,7 +51,7 @@
     <main>
 
         <!-- formulário  para cadastrar as transações -->
-        <form class="form-transaction" action="">
+        <form id="form-transaction" class="form-transaction" action="">
 
             <div class="form-tit form-item">Nova Transação</div>
 
@@ -76,7 +76,7 @@
             <div class="form-item">
 
                 <label for="form-transaction-value">Valor</label>
-                <input type="number" id="form-transaction-value" 
+                <input autocomplete="off" type="text" id="form-transaction-value" 
                 placeholder="R$ 00,00">
 
             </div>
@@ -86,7 +86,7 @@
         </form>
 
         <!-- elemento que mostra os extratos -->
-        <div class="extrato">
+        <div id="extrato" class="extrato">
 
             <div class="extrato-tit">Extrato das Transações</div>
 
@@ -95,33 +95,11 @@
                 <div>Valor</div>
             </div>
 
-            <div id="transactions">
-
-                <div class="transaction">
-                    <div class="transaction-type buy"></div>
-                    <div class="product-name">Caminhão modelo ultra super foda pica supremo poderoso imponente derradeiro imparável singular XM980</div>
-                    <div class="product-value">R$ 1000.00</div>
-                </div>
-
-                <div class="transaction">
-                    <div class="transaction-type sale"></div>
-                    <div class="product-name ">Celular X78</div>
-                    <div class="product-value">R$ 1200.00</div>
-                </div>
-
-                <div class="transaction">
-                    <div class="transaction-type buy"></div>
-                    <div class="product-name">Bicicleta</div>
-                    <div class="product-value">R$ 200.00</div>
-                </div>
-
-            </div>
+            <div id="transactions"></div>
 
             <div class="bottom-header">
                 <div>Total</div>
-                <div id="soma">R$ 2400.00
-                    <span id="resultado">[Lucro]</span>
-                </div>
+                <div id="resultado">R$ 2400.00 [Lucro]</div>
             </div>
 
         </div>
