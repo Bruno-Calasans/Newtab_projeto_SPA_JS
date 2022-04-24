@@ -1,6 +1,160 @@
 
 
-    //
+    import {get, create, insert, isArray, isString} from './functions.js'
+
+    const key = 'transactions'
+
+    // representa uma transação
+    class Transaction{
+
+        constructor(name, value, type=0){
+
+            const types = ['buy', 'sale']
+            this.name = name
+            this.value = value
+            this.type = types[type]
+        }
+    }
+
+    class TransactionsManager{
+
+        constructor(...transactions){
+
+            // elementos principais
+            this.elementoContainer = get('transactions')
+            this.elementoResultado = get('resultado')
+            this.resultado = {total: 0, situação: ''}
+            this.transactions = []
+
+            // array de transactions
+            if(transactions.length == 1 && isArray(transactions[0]))
+            transactions = transactions[0]
+
+            // configurações inicias
+            if(transactions.length > 0) this.insert(transactions)
+        }
+
+        // transforma um elemento transaction com um obj transaction
+        createHtml(obj){
+
+            if(!obj) return null
+
+            const type = obj.type
+            const name = obj.name
+            const value = obj.value
+
+            // elemento transaction
+            const transaction = create('div', 'transaction')
+
+            // partes do elemento transaction
+            const transactionType = create('div', `transaction-type ${type}`)
+            const productName = create('div', 'product-name', name)
+            const productValue = create('div', 'product-value', `R$ ${value}`)
+
+            let elementos = [transactionType, productName, productValue]
+            insert(transaction, elementos)
+
+            return transaction
+        }
+
+        // transaforma vários objs transaction em elementos transactions
+        createHtmls(...objs){
+
+            objs = objs.length == 1 ? objs[0] : objs
+            let array = []
+            for(let obj of objs) array.push(this.createHtml(obj))
+            return array
+        }
+
+        // insere um ou vários elementos transaction no container
+        insert(...objs){
+
+            // limpando o container
+            if(this.transactions.length == 0) 
+                this.elementoContainer.innerHTML = ''
+
+            if(objs.length == 1 && isArray(objs[0])) objs = objs[0]
+
+            let htmls = this.createHtmls(objs)
+            insert(this.elementoContainer, htmls)
+
+            this.updateTransactions(objs)
+            this.updateResultado()
+
+            // verificando o localStorage
+            if(localStorage.keyExists(key)){
+
+                localStorage.objsExist(key, objs, 'name', (obj, existe) => {
+                    if(!existe) localStorage.insertObjs(key, obj)
+                })
+            }
+              
+            else
+              localStorage.saveObjs(key, objs)
+        }
+
+        // atualiza o resultado geral das transações
+        updateResultado(){
+
+            // Calculando a total das transações
+            this.resultado.total = 0
+
+            for(let transaction of this.transactions){
+
+                let value = transaction.value
+                if(transaction.type == 'buy') 
+                    this.resultado.total -= value
+                else 
+                    this.resultado.total += value
+            }
+
+            // determinando a situação
+            const total = this.resultado.total
+
+            if(total < 0)
+                this.resultado.situação = '[Prejuízo]'
+
+            else if(total == 0) 
+                this.resultado.situação = ''
+
+            else 
+                this.resultado.situação = '[Lucro]'
+
+            // atualizando o elemento resultado
+            this.elementoResultado.innerHTML = `
+            R$ ${this.resultado.total} ${this.resultado.situação}`
+        }
+
+        // atualiza os objs dentro de this.transactions
+        updateTransactions(...objs){
+
+            if(objs.length == 1 && isArray(objs)) objs = objs[0]
+            for(let obj of objs) this.transactions.push(obj)
+        }
+
+        clear(){
+
+            // limpando transactions
+            this.transactions = []
+
+            // limpando os elementos do container
+            while(this.elementoContainer.children.length > 0)
+            this.elementoContainer.children[0].remove()
+
+            // atualizando o objeto resultado
+            this.resultado.total = 0
+            this.resultado.situação = ''
+
+            // atualizando o elemento resultado
+            this.elementoResultado.innerHTML = ''
+
+            // inserindo mensagem no container
+            this.elementoContainer.innerHTML = 'Nenhuma transação cadastrada'
+
+            // limpando o localstorage
+            localStorage.clear()
+        }
+    }
 
     // adiciona novos métodos para todo objeto
     class ObjectManager{
@@ -43,6 +197,16 @@
                 }
 
             }
+
+            String.prototype.toNumber = function(){
+
+                let num = this.replace(/[^\d\.,]/g, '')
+        
+                let antesVirgula = num.match(/[\d+\.]+(?=,)/g)[0].replace(/\.+/, '')
+                let depoisVirgula = num.match(/,\d+/g)[0].replace(/,+/, '.') 
+        
+                return Number(antesVirgula + depoisVirgula)
+            }
                 
         }
     }
@@ -54,7 +218,6 @@
     class LocalStorageManager{
 
         constructor(){
-
             // config incial
             this.config()
         }
@@ -78,7 +241,7 @@
                 this.setItem(key, array)
             }
 
-            // pega um objeto esepcífico
+            // verifica se um objeto existe
             Storage.prototype.objExists = function(key, objComparado, objKey){
 
                 // verificando se a chave existe
@@ -93,6 +256,20 @@
                 }
 
                 return false
+            }
+
+            // verifica se vários objs existem
+
+            Storage.prototype.objsExist = function(key, objs, objKey, cb){
+
+                if(!this.keyExists(key)) return null
+
+                // objetos que serão comparados
+                for(let obj of objs){
+                    let existe = this.objExists(key, obj, objKey)
+                    cb(obj, existe)
+                }
+
             }
 
             // pega todos os objetos da local storage de uma determinada key
@@ -176,3 +353,4 @@
 
     // inciando a classe
     const LSConfig = new LocalStorageManager
+    export {key, Transaction, TransactionsManager, objsConfig, LSConfig}

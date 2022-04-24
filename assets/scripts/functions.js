@@ -28,20 +28,31 @@
         return parent
     }
 
-
     // funcões de verificação --------------------------------------------------
-
     function isArray(dado){return dado instanceof Array}
+
     function isObj(dado){return dado instanceof Object}
+
+    function isAlfaNumber(dado){
+        const nonRegexAlfaNumber = /[^a-zA-Z \d\-\u00C0-\u00FF]+/gi
+        return !nonRegexAlfaNumber.test(dado)
+    }
 
     function isNumber(dado){
         const regexNubmer = /\d/
         return regexNubmer.test(dado)
     }
 
+    function isString(dado){return dado.constructor == String}
+
     function isMoneyFormat(dado){
-        const regexMoney = /([a-zA-Z]+\$ \d+[,\.]\d+)|([a-zA-Z]+\$ \d+)/
+        const regexMoney = /([a-zA-Z]+\$[\u00a0 ]\d+,\d+)|([a-zA-Z]+\$[\u00a0 ](?:\d{1,3}\.)*\d{3},\d+)/
         return regexMoney.test(dado)
+    }
+
+    export {
+        get, selector, create, insert, 
+        isAlfaNumber, isArray, isString, isObj, isNumber, isMoneyFormat
     }
 
     

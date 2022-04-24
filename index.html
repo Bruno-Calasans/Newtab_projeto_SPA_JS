@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/responsividade.css">
     <script src="assets/scripts/menu-mobile.js" defer></script>
-    <script src="assets/scripts/form.js" defer></script>
+    <script type="module" src="assets/scripts/form.js" defer></script>
 </head>
 <body>
 
@@ -25,6 +25,7 @@
 
                  <!-- menu desktop/tablet -->
                 <nav id="menu">
+
                     <ul class="menu-list">
                         <div id="closeBtn">×</div>
 
@@ -35,7 +36,7 @@
                         <li class="separador">|</li>
 
                         <li class="list-item">
-                            <a href="">Limpar Dados</a>
+                            <a id="btnClear" href="">Limpar Dados</a>
                         </li>
                     </ul>
                 </nav>
@@ -59,8 +60,8 @@
 
                 <label for="form-transaction-type">Tipo de Transação</label>
                 <select id="form-transaction-type">
-                    <option value="1">Compra</option>
-                    <option value="2">Venda</option>
+                    <option value="0">Compra</option>
+                    <option value="1">Venda</option>
                 </select>
 
             </div>
@@ -68,7 +69,8 @@
             <div class="form-item">
                 
                 <label for="form-transaction-product">Nome da mercadoria</label>
-                <input type="text" id="form-transaction-product" 
+                <input autocomplete="off"
+                type="text" id="form-transaction-product" 
                 placeholder="Mercadoria">
 
             </div>
@@ -95,11 +97,11 @@
                 <div>Valor</div>
             </div>
 
-            <div id="transactions"></div>
+            <div id="transactions">Nenhuma transação cadastrada</div>
 
             <div class="bottom-header">
                 <div>Total</div>
-                <div id="resultado">R$ 2400.00 [Lucro]</div>
+                <div id="resultado"></div>
             </div>
 
         </div>
