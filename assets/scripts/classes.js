@@ -33,7 +33,7 @@
             if(transactions.length > 0) this.insert(false, transactions)
         }
 
-        // transforma um elemento transaction com um obj transaction
+        // transforma um obj transaction com um elemento transaction
         createHtml(obj){
 
             if(!obj) return null
