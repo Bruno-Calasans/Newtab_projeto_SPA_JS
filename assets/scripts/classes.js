@@ -1,7 +1,6 @@
 
 
     import {get, create, insert, isArray, isString} from './functions.js'
-
     const key = 'transactions'
 
     // representa uma transação
@@ -31,7 +30,7 @@
             transactions = transactions[0]
 
             // configurações inicias
-            if(transactions.length > 0) this.insert(transactions)
+            if(transactions.length > 0) this.insert(false, transactions)
         }
 
         // transforma um elemento transaction com um obj transaction
@@ -52,8 +51,10 @@
             const productValue = create('div', 'product-value', `R$ ${value}`)
 
             let elementos = [transactionType, productName, productValue]
-            insert(transaction, elementos)
 
+            // inserindo elementos dentro do elemento transaction
+            insert(transaction, elementos)
+            
             return transaction
         }
 
@@ -67,7 +68,7 @@
         }
 
         // insere um ou vários elementos transaction no container
-        insert(...objs){
+        insert(repeat=false, ...objs){
 
             // limpando o container
             if(this.transactions.length == 0) 
@@ -81,14 +82,22 @@
             this.updateTransactions(objs)
             this.updateResultado()
 
-            // verificando o localStorage
+            // se já existir uma key no local storage
             if(localStorage.keyExists(key)){
 
-                localStorage.objsExist(key, objs, 'name', (obj, existe) => {
-                    if(!existe) localStorage.insertObjs(key, obj)
-                })
+                // se puder repetir elementos
+                if(repeat){
+                    localStorage.insertObjs(key, objs)
+                    
+                // caso não possa repetir elementos
+                }else{
+                    localStorage.objsExist(key, objs, 'name', (obj, existe) => {
+                        if(!existe) localStorage.insertObjs(key, obj)
+                    })
+                }
             }
               
+            // caso não exista nenhuma key
             else
               localStorage.saveObjs(key, objs)
         }
@@ -142,8 +151,7 @@
             this.elementoContainer.children[0].remove()
 
             // atualizando o objeto resultado
-            this.resultado.total = 0
-            this.resultado.situação = ''
+            this.resultado = {total: 0, situação: ''}
 
             // atualizando o elemento resultado
             this.elementoResultado.innerHTML = ''
@@ -156,7 +164,7 @@
         }
     }
 
-    // adiciona novos métodos para todo objeto
+    // adiciona novos métodos para todo objeto e string
     class ObjectManager{
 
         constructor(){this.config()}
@@ -166,6 +174,7 @@
             // converte um objeto para array
             Object.prototype.toArray = function(){return Object.values(this)}
 
+            // compara se dois objetos são iguais usando um valor de chave como critério
             Object.prototype.isEqual = function(obj2, key, caseSensitive=true, strict=true){
 
                 let valor1 = this[key]
@@ -181,7 +190,6 @@
                     // caso sejam qualquer tipo de dado
                     else
                         return valor1 === valor2
-                    
                 }
 
                 // diferencia apenas o valor
@@ -198,6 +206,7 @@
 
             }
 
+            // transforma um string em número
             String.prototype.toNumber = function(){
 
                 let num = this.replace(/[^\d\.,]/g, '')
@@ -211,7 +220,7 @@
         }
     }
 
-    // iniciando a classe
+    // iniciando um classe já configurada
     const objsConfig = new ObjectManager()
 
     // adiciona novos métodos para o LocalStorage
@@ -351,6 +360,7 @@
 
     }
 
-    // inciando a classe
+    // inciando a classe já configurada
     const LSConfig = new LocalStorageManager
+
     export {key, Transaction, TransactionsManager, objsConfig, LSConfig}

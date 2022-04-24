@@ -1,9 +1,10 @@
 
 
-    import {get, isAlfaNumber, isMoneyFormat} from './functions.js'
+    import {get, isAlfaNumber, moneyFormat,isMoneyFormat, isNumber} from './functions.js'
+    
     import {key, Transaction, TransactionsManager, objsConfig, LSConfig} from './classes.js'
 
-    // verificando o local storage
+    // verificando se já existe alguma transação feita no lcoal storage
     if(localStorage.keyExists(key)) 
         var transactions = localStorage.getObjs(key)
     else
@@ -14,8 +15,10 @@
     // botão de limpar ---------------------------------------------------------
     const btnClear = get('btnClear')
     btnClear.onclick = (e)=> {
+
         e.preventDefault()
-        ts.clear()
+        let rsp = confirm('Deseja apagar todos os dados?')
+        if(rsp) ts.clear()
     }
 
     // formulário e seus elementos ---------------------------------------------
@@ -57,7 +60,7 @@
 
         // criando um objeto transação
         const transaction = new Transaction(produto, valor.toNumber(), tipo)
-        ts.insert(transaction)
+        ts.insert(true, transaction)
     }
 
     // tratamento do campo produto ---------------------------------------------
@@ -73,8 +76,20 @@
         if(!isAlfaNumber(dado)) e.preventDefault()
     }
 
+   
+    transactionValue.onkeypress = (e)=> {
+
+        e.preventDefault()
+
+        if(isNumber(e.key)){
+            e.target.value = moneyFormat(e.target.value + e.key)
+        }
+       
+    }
+
+    
     // tratamento do campo valor -----------------------------------------------
-    transactionValue.onkeypress = function(e){
+    /*transactionValue.onkeypress = function(e){
 
         let tecla = e.key
 
@@ -93,7 +108,7 @@
         }else{
             e.preventDefault()
         }  
-    }
+    }*/
 
     // tratamento ao colar
     transactionValue.onpaste = function(e){

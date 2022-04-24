@@ -50,9 +50,24 @@
         return regexMoney.test(dado)
     }
 
+    // converte uma string para o formato monetário desejado
+    function moneyFormat(string, cifra='R$') {
+
+        const valor = string
+          .replace(/\D/g, '')
+          .replace(/^0*/, '')
+          .padStart(3, '0')
+          
+        let p1 = valor.slice(0, -2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        let p2 = valor.slice(-2)
+
+        return  `${cifra} ${p1},${p2}`
+    }
+
     export {
         get, selector, create, insert, 
-        isAlfaNumber, isArray, isString, isObj, isNumber, isMoneyFormat
+        isAlfaNumber, isArray, isString, isObj, isNumber, isMoneyFormat,
+        moneyFormat
     }
 
     
